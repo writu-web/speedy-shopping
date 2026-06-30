@@ -1,6 +1,7 @@
+import {memo} from 'react'
 import { Link } from "react-router-dom"
 
-const Nav = () => {
+const Nav = memo(() => {
     return (
         <nav>
             <ul>
@@ -12,6 +13,6 @@ const Nav = () => {
             </ul>
         </nav>
     )
-}
+})
 
 export default Nav

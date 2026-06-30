@@ -1,11 +1,15 @@
+import { lazy, Suspense } from "react"
 import LoginForm from "./LoginForm"
-import RegisterForm from "./RegisterForm"
+
+const RegisterForm = lazy(() => import("./RegisterForm"))
 
 const AuthPage = ()=>{
     return(
         <div>
             <LoginForm/>
-            <RegisterForm/>
+            <Suspense fallback={<div>Loading...</div>}>
+                <RegisterForm/>
+            </Suspense>
         </div>
     )
 }

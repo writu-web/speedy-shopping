@@ -16,7 +16,6 @@ apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error("API Error:", error);
     if (error.response && error.response.status === 401) {
       localStorage.removeItem("token");
       window.location.href = "/";

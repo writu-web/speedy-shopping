@@ -1,6 +1,7 @@
+import { memo } from "react"
 import Nav from "./nav"
 
-const Header = () => {
+const Header = memo(() => {
   return (
     <header className="bg-gray-600 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -9,5 +10,5 @@ const Header = () => {
       </div>
     </header>
   )
-}
+})
 export default Header

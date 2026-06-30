@@ -1,9 +1,9 @@
 import apiClient from "../../../lib/api/axios";
 import type { loginCredentials, registerCredentials } from "../types/auth.type";
-async function login({ username, password }: loginCredentials) {
+async function login({ email, password }: loginCredentials) {
   try {
     const response = await apiClient.post("/auth/login", {
-      username,
+      email,
       password,
     });
     const { token } = response.data;

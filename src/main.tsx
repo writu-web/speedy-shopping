@@ -1,17 +1,26 @@
-import { StrictMode } from 'react'
+import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './index.css'
 import App from './App.tsx'
-import Cart from './features/cart/components/Cart.tsx'
 import {store} from './state/store.ts'
-import AuthPage from './features/auth/components/authPage.tsx'
-import Product from './features/products/components/products.tsx'
-import Home from './features/home/components/home.tsx'
-import Users from './features/users/components/users.tsx'
-const queryClient = new QueryClient()
+
+const queryClient = new QueryClient({
+  defaultOptions:{
+    queries:{
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+      retry: 1
+    }
+  }
+})
+const Home = lazy(()=>import('./features/home/components/home.tsx'))
+const AuthPage = lazy(()=>import('./features/auth/components/authPage.tsx'))
+const Cart = lazy(()=> import('./features/cart/components/Cart.tsx'))
+const Product = lazy(()=>import('./features/products/components/products.tsx'))
+const Users = lazy(()=>import('./features/users/components/users.tsx'))
 
 const root = createBrowserRouter([{
   path: "/",
@@ -20,23 +29,23 @@ const root = createBrowserRouter([{
   children: [
     {
       path:"/login",
-      element:<AuthPage/>,
+      element:<Suspense fallback={<div>Loading...</div>}><AuthPage/></Suspense>,
     },
     {
       index: true,
-      element:<Home/>,
+      element:<Suspense fallback={<div>Loading...</div>}><Home/></Suspense>,
     },
     {
       path:"/cart",
-      element:<Cart/>,
+      element:<Suspense fallback={<div>Loading...</div>}><Cart/></Suspense>,
     },
     {
       path:"/products",
-      element:<Product/>,
+      element:<Suspense fallback={<div>Loading...</div>}><Product/></Suspense>,
     },
     {
       path:"/users",
-      element:<Users/>
+      element:<Suspense fallback={<div>Loading...</div>}><Users/></Suspense>
     }
   ] 
 },
