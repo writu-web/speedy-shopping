@@ -1,6 +1,6 @@
 describe("register form", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/login");
+    cy.visit("/login");
   });
   it("it will enter username", () => {
     cy.get('[data-test="register-username"]').type("writu{enter}");
