@@ -7,7 +7,7 @@ const useProducts = () => {
       queryKey: ["products"],
       queryFn: async ({ pageParam }) => fetchProducts(pageParam),
       initialPageParam: 1,
-      getNextPageParam: (lastPage, _allPages, lastPageParam, _allPageParams) =>
+      getNextPageParam: (lastPage, _allPages, lastPageParam) =>
         lastPage.length > 0 ? lastPageParam + 1 : undefined,
     });
   return { data, fetchNextPage, hasNextPage, isFetchingNextPage };
