@@ -1,4 +1,3 @@
-import {useState} from "react";
 import { useForm } from "react-hook-form";
 import useRegister from "../hooks/useRegister";
 import {type RegisterSchemaType, RegisterSchema } from "../schemas/register.schema";
